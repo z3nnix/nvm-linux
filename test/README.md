@@ -1,0 +1,1 @@
+all tests from NovariaOS[*](https://github.com/z3nnix/NovariaOS/tree/main/apps)

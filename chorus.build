@@ -1,0 +1,27 @@
+variables:
+  CC: "gcc"
+  LD: "gcc"
+  CFLAGS: "-Ilib -c -Wall"
+  LDFLAGS: "-Wall"
+
+targets:
+  all:
+    deps: [nvm]
+
+  nvm:
+    deps: [main.o, syscall.o]
+    cmds:
+      - "${LD} ${LDFLAGS} -o ${@} ${^}"
+      - "rm -rf *.o"
+
+  main.o:
+    cmds:
+      - "${CC} ${CFLAGS} -Ilib src/main.c -o ${@}"
+
+  syscall.o:
+    cmds:
+      - "${CC} ${CFLAGS} -Ilib lib/syscall.c -o ${@}"
+
+  clean:
+    cmds:
+      - "rm -rf *.o nvm"
