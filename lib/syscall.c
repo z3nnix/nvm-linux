@@ -2,6 +2,8 @@
 #include <log.h>
 #include <stdio.h>
 
+int8_t value;
+
 int32_t syscall_handler(int8_t syscall_id, nvm_process_t* proc) {
     switch(syscall_id) {
         case SYSCALL_EXIT:
@@ -15,6 +17,16 @@ int32_t syscall_handler(int8_t syscall_id, nvm_process_t* proc) {
             LOG_DEBUG("Process %d: Exited with code %d\n", proc->pid, proc->exit_code);
             break;
 
+        case SYSCALL_PRINT: // temporary, will be replace for /dev/console
+            if (proc->sp < 1) {
+                LOG_WARN("Process %d: Stack underflow for print\n", proc->pid);
+                return -1;
+            }
+
+            value = proc->stack[proc->sp - 1] & 0xFF;
+            printf("%c", (char)value);
+            proc->sp -= 1;
+            break;
         default:
             LOG_WARN("Process %d: Unknown syscall %d\n", proc->pid, syscall_id);
             proc->exit_code = -1;

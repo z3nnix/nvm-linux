@@ -4,3 +4,6 @@ nvm
 
 # Logs
 nvm.log
+
+# NVM binary files
+*.nvm
