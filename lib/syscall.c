@@ -2,7 +2,7 @@
 #include <log.h>
 #include <stdio.h>
 
-int8_t value;
+uint8_t value;
 
 int32_t syscall_handler(int8_t syscall_id, nvm_process_t* proc) {
     switch(syscall_id) {

@@ -1,7 +1,13 @@
-.NVM
+; Example app
+; Compiled with NVMa(https://github.com/z3nnix/NVMa)
 
-push 2
-push 2
+.NVM0
+
+; Calculate 5 + 3
+push 5
+push 3
 add
 
-syscall exit ; excepted 4(really)
+; Result (8) now on stack
+
+syscall exit ; result 8 will be use like exitcode
